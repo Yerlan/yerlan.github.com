@@ -1,0 +1,559 @@
+@charset "UTF-8";
+
+//Reset
+@import 'reset.css';
+
+//Font
+@font-face {
+	font-family: '../fonts/San Francisco Text';
+	src: url('SanFranciscoText-Medium.eot');
+	src: local('San Francisco Text Medium'), local('SanFranciscoText-Medium'),
+		url('../fonts/SanFranciscoText-Medium.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/SanFranciscoText-Medium.woff') format('woff'),
+		url('../fonts/SanFranciscoText-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'San Francisco Text';
+	src: url('../fonts/SanFranciscoText-Bold.eot');
+	src: local('San Francisco Text Bold'), local('SanFranciscoText-Bold'),
+		url('../fonts/SanFranciscoText-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/SanFranciscoText-Bold.woff') format('woff'),
+		url('../fonts/SanFranciscoText-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'San Francisco Text';
+	src: url('../fonts/SanFranciscoText-Semibold.eot');
+	src: local('San Francisco Text Semibold'), local('SanFranciscoText-Semibold'),
+		url('../fonts/SanFranciscoText-Semibold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/SanFranciscoText-Semibold.woff') format('woff'),
+		url('../fonts/SanFranciscoText-Semibold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+
+//Colour scheme
+$white: #FFF;
+$black: #000;
+$blue: #00008a;
+$lightgrey: #f4f4f4;
+$grey: #545454;
+
+//Images
+$logo: url("../images/logo.png");
+// $line: url("../images/diagonalLine.png");
+$line: url("../images/line.svg");
+$eye: url("../images/eye.png");
+$tablet: url("../images/tablet.png");
+
+//Retina
+@mixin image2x($image, $position, $repeat, $size) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    /* on retina, use image that's scaled by 2 */
+    background: $image $position $repeat;
+    background-size: $size;
+  }
+
+}
+
+html, body{
+
+    background: rgb(253, 253, 253);
+    min-width: 1100px;
+    max-width: 2000px;
+    height: 100%;
+    margin:0 auto;
+    overflow:no-display;
+    font-family: 'SanFranciscoText-Medium', sans-serif;
+    /*border:8px solid white;*/
+}
+
+.animated{
+  opacity:0;
+  transform: translateY(50px);
+  -webkit-transform: translateY(50px);
+
+  &.up{
+    transform: translateY(-50px);
+    -webkit-transform: translateY(-50px);
+  }
+
+  &.fixed{
+    transform: none;
+    -webkit-transform: none;
+  }
+
+}
+
+button{
+
+    -webkit-transition: all 350ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -moz-transition: all 350ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -o-transition: all 350ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    transition: all 350ms cubic-bezier(0.190, 1.000, 0.220, 1.000); /* easeOutExpo */
+
+    -webkit-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -moz-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -o-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000); /* easeOutExpo */
+
+}
+
+.button{
+
+    background: rgb(232,232,232);
+    background: -moz-linear-gradient(top,  rgba(232,232,232,1) 1%, rgba(204,204,204,1) 100%);
+    background: -webkit-linear-gradient(top,  rgba(232,232,232,1) 1%,rgba(204,204,204,1) 100%);
+    background: linear-gradient(to bottom,  rgba(232,232,232,1) 1%,rgba(204,204,204,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#cccccc',GradientType=0 );
+
+    border-radius: 5px;
+    color:darken($grey, 40%);
+    padding:12px 25px;
+    font-family: 'SanFranciscoText-Medium', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor:pointer;
+    // letter-spacing: 1.5px;
+    letter-spacing: 0.8px;
+
+}
+
+*{
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    button:focus {outline:0;}
+    -webkit-appearance: none;
+    outline: 0;
+    font-family: 'SanFranciscoText-Medium', sans-serif;
+
+}
+
+::selection {
+    background: $blue;
+    color:$white;
+}
+
+::-moz-selection {
+    background: $blue;
+    color:$white;
+}
+
+button{
+    /*Reset's every elements apperance*/
+    background: none repeat scroll 0 0 transparent;
+    border: none;
+    border-spacing: 0;
+    color: #26589F;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+
+    //Non selectable text
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+//Headings mixin
+@mixin heading($size, $lh, $fw) {
+    font-family: 'SanFranciscoText-Medium', sans-serif;
+    font-size: unquote($size+"em");
+    line-height: unquote($lh+"em");
+    font-weight: $fw;
+    /*margin: 0.100em 0;*/
+}
+
+h1{
+    @include heading(1.800, 1.000, 300);
+}
+
+h2{
+    @include heading(1.600, 1.380, 300);
+}
+
+h3{
+    @include heading(1.400, 1.380, 300);
+}
+
+h4{
+    @include heading(1.300, 1.380, 400);
+}
+
+h5{
+    @include heading(1.200, 1.380, 400);
+}
+
+h6{
+    @include heading(1.100, 1.200, 400);
+}
+
+p{
+    font-family: 'SanFranciscoText-Medium', sans-serif;
+    font-size:0.950em;
+    line-height: 1.400em;
+}
+
+strong{
+  font-weight: 800;
+}
+
+.title, .text{
+
+    &.aboutTitle{
+      font-family: 'SanFranciscoText-Semibold', sans-serif;
+      width:50%;
+      float:left;
+      margin:60px 0 30px 0;
+      padding:0;
+      text-align: left;
+      color:$blue;
+      font-size: 3.800em;
+      line-height: 1.200em;
+    }
+
+    &.projectTitle{
+      font-family: 'SanFranciscoText-Semibold', sans-serif;
+      width:100%;
+      margin:0;
+      padding:0 20px 0 0;
+      text-align: left;
+      color:$blue;
+      font-size: 3.800em;
+      line-height: 1.200em;
+    }
+
+    &.projectDescription{
+      width:100%;
+      margin:2.000em 0 0 0;
+      padding:0 40px 0 0;
+      text-align: left;
+      color:$blue;
+    }
+
+}
+
+a:link, a:visited {
+    font-family: 'SanFranciscoText-Medium', sans-serif;
+    font-size:0.950em;
+    text-decoration:underline;
+    color:$blue;
+}
+
+a:hover{
+    text-decoration:none;
+}
+
+header{
+  width:100%;
+  background:$blue;
+  height:80px;
+
+  .headContainer{
+    width:1000px;
+    height:80px;
+    margin:0 auto;
+
+    .logo{
+      width:132px;
+      height:80px;
+      float:left;
+      background:$logo center center no-repeat;
+      background-size:132px 30px;
+    }
+  }
+}
+
+nav{
+  float:right;
+  height:80px;
+
+  ul{
+    height:100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  li {
+    float: left;
+    height: 80%;
+    overflow: hidden;
+    margin:0 10px;
+
+    &.active{
+      border-bottom: 2px solid $white;
+    }
+
+    &:hover{
+      border-bottom: 2px solid $white;
+    }
+  }
+
+  li a {
+      font-size: 15px;
+      line-height: 80px;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 0;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  a:link, a:visited {
+      font-family: 'SanFranciscoText-Medium', sans-serif;
+      text-decoration:none;
+      color:$white;
+  }
+
+  a:hover{
+      text-decoration:none;
+  }
+
+}
+
+.container{
+  width:1000px;
+  margin:0 auto;
+  overflow: auto;
+}
+
+.largecontainer{
+	width:687px;
+  display:inline-block;
+  vertical-align: top;
+  margin:20px 40px 20px 0;
+  -webkit-transition: all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:         all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+	.box{
+    width:200px;
+    height:200px;
+    display: block;
+    margin:0;
+    border:1px solid $blue;
+    background:$line center center no-repeat;
+    background-size: 200px 200px;
+    position:relative;
+    -webkit-transition: all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition:         all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &.large{
+      width:687px;
+      background:$white;
+      cursor:default;
+      display: table;
+
+			.cell{
+				width:100%;
+				height:100%;
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+				padding:20px;
+
+				.ttag{
+					user-select: none;
+					padding:6px 10px;
+					background: $blue;
+					color:$white;
+					font-family: 'SanFranciscoText-Medium', sans-serif;
+					font-size: 14px;
+					display: inline-block;
+					margin:5px;
+					border-radius: 5px;
+					-webkit-transition: all 0.14s cubic-bezier(0.645, 0.045, 0.355, 1);
+			    transition:         all 0.14s cubic-bezier(0.645, 0.045, 0.355, 1);
+					cursor:pointer;
+
+					&:hover{
+						background: lighten($blue, 35%);
+					}
+				}
+			}
+    }
+
+  }
+
+}
+
+.showcontainer{
+  width:200px;
+  display:inline-block;
+  vertical-align: top;
+  margin:20px 40px 20px 0;
+  -webkit-transition: all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:         all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+  cursor:pointer;
+
+  &.large{
+    width:680px;
+  }
+
+  &:hover{
+    opacity:0.6;
+  }
+
+  h5{
+    font-family: 'SanFranciscoText-Semibold', sans-serif;
+    color:$blue;
+    text-align: left;
+    width:100%;
+    padding:1.000em 0 0 0;
+  }
+
+  p{
+    font-family: 'SanFranciscoText-Medium', sans-serif;
+    color:$blue;
+    text-align: left;
+    width:100%;
+    padding:0;
+  }
+
+  .divider{
+    width:40px;
+    height:2px;
+    display: block;
+    margin:7px 0;
+    background: $blue;
+    -webkit-transition: all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition:         all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .box{
+    width:200px;
+    height:200px;
+    display: block;
+    margin:0;
+    border:1px solid $blue;
+    background:$line center center no-repeat;
+    background-size: 200px 200px;
+    position:relative;
+    -webkit-transition: all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition:         all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &.large{
+      width:680px;
+      background:$white;
+      cursor:default;
+      display: table;
+
+			.cell{
+				width:100%;
+				height:100%;
+				display: table-cell;
+				vertical-align: center;
+				text-align: center;
+
+				.ttag{
+					padding:7px 12px;
+					background: $blue;
+					color:$white;
+					font-family: 'SanFranciscoText-Medium', sans-serif;
+					font-size: 15px;
+					display: inline-block;
+					margin:10px;
+				}
+			}
+    }
+
+    .tab{
+      position: absolute;
+      margin:auto;
+      top:0;bottom:0;
+      left:0;right:0;
+      width:150px;
+      height:120px;
+      background:$tablet center center no-repeat;
+      background-size:150px 120px;
+      -webkit-transition: all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition:         all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .eye{
+      position: absolute;
+      margin:auto;
+      top:0;bottom:0;
+      left:0;right:0;
+      width:113px;
+      height:80px;
+      background:$eye center center no-repeat;
+      background-size:113px 80px;
+      -webkit-transition: all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition:         all 0.34s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+  }
+
+}
+
+.backBtn{
+
+  -webkit-transition: all 0.14s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition:         all 0.14s cubic-bezier(0.645, 0.045, 0.355, 1);
+  float:left;
+  width: auto;
+  overflow: none;
+  line-height: 2.500em;
+  font-size: 1.200em;
+  color:$blue;
+  cursor: pointer;
+  user-select: none;
+  border-bottom:2px solid $blue;
+  margin:40px 0;
+
+  &:hover{
+    // opacity:0.6;
+    border-bottom:2px solid $white;
+  }
+
+}
+
+.projectLeft{
+  width:40%;
+  float:left;
+}
+
+.projectRight{
+  width:60%;
+  float:left;
+
+  .browserWrap{
+    width:600px;
+    margin:0 auto;
+    -webkit-box-shadow: 0px 17px 58px -2px rgba(0,0,0,0.16);
+    -moz-box-shadow: 0px 17px 58px -2px rgba(0,0,0,0.16);
+    box-shadow: 0px 17px 58px -2px rgba(0,0,0,0.16);
+    border-radius: 5px;
+    overflow: hidden;
+    padding:0;
+
+    img{
+      padding:0;
+      margin:0;
+      display: block;
+    }
+  }
+
+}
